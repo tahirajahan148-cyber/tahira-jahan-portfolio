@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study — Tahira Jahan</title>
+  <meta name="description" content="A design case study by Tahira Jahan — process, contributions, and gallery." />
+  <meta name="theme-color" content="#F4EEEA" />
+  <meta property="og:type" content="article" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2321171D'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%236A2E45' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <header class="nav scrolled" id="nav">
+    <a class="brand" href="index.html" aria-label="Tahira Jahan — home">Tahira<b>Jahan</b><span class="dot">.</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#work">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main id="cs"><!-- rendered by case-study.js --></main>
+
+  <footer class="footer dark">
+    <div class="wrap">
+      <div class="footer-top">
+        <h3>Designing visuals that leave a lasting impression.</h3>
+        <div class="footer-socials">
+          <a href="mailto:tahirajahan148@gmail.com">Email</a>
+          <a href="https://wa.me/8801728981741" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/tahira-jahan-450676322/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.behance.net/tahirajahan2" target="_blank" rel="noopener">Behance</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Tahira Jahan — It's me Iku</span>
+        <span><a href="index.html#work" style="color:inherit">← All projects</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <img id="lbImg" src="" alt="" />
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+    <span class="lb-count" id="lbCount"></span>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="case-study.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
