@@ -298,6 +298,195 @@ section { position: relative; }
 .exp-chips span:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
 /* =========================================================================
+   About — portrait anchor + bento grid
+   ========================================================================= */
+#about [data-reveal] {
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+
+/* one explicit grid, three columns / three rows. every card is pinned to a
+   named area and stretches to fill it, so row heights are shared across the
+   composition (Solvetech's height = FalcryX + DCU; Hult = Iku; the profile
+   module spans everything). one gutter everywhere, no per-card margins. */
+.ab-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, .95fr) 1.05fr 1.2fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "profile solvetech falcryx"
+    "profile solvetech dcu"
+    "profile hult      iku";
+  gap: 22px;
+}
+
+.ab-profile { grid-area: profile; }
+.ab-feature { grid-area: solvetech; }
+.ab-falcryx { grid-area: falcryx; }
+.ab-dcu     { grid-area: dcu; }
+.ab-hult    { grid-area: hult; }
+.ab-iku     { grid-area: iku; }
+
+/* profile module — portrait on top, intro attached beneath, one card */
+.ab-card.ab-profile { padding: 0; }
+.ab-portrait {
+  margin: 0;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 300px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #F4EAEA 0%, #EEDFE0 100%);
+  border-bottom: 1px solid rgba(244,238,234,.14);
+}
+.ab-portrait img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 8%;
+  transition: transform .7s cubic-bezier(.22,1,.36,1);
+}
+.ab-profile:hover .ab-portrait img { transform: scale(1.02); }
+.ab-intro { padding: clamp(22px,2.6vw,32px); }
+
+/* intro — sits directly under the portrait as part of the profile module */
+.ab-hi { font-family: var(--mono); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 0 0 .5rem; }
+.ab-name { font-family: var(--display); font-size: clamp(1.6rem,2.6vw,2.1rem); color: var(--paper); margin: 0 0 .4rem; }
+.ab-title { font-size: .92rem; color: var(--muted-dark); margin: 0 0 .2rem; }
+.ab-title .ab-x { color: var(--gold); }
+.ab-school { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-dark); margin: 0; opacity: .8; }
+
+.ab-card {
+  position: relative;
+  /* stretch to the grid area (default) so shared rows stay flush */
+  background: rgba(244,238,234,.06);
+  border: 1px solid rgba(244,238,234,.14);
+  border-radius: var(--radius-lg);
+  padding: clamp(22px,2.6vw,32px);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), border-color .4s, box-shadow .4s, background .4s;
+  overflow: hidden;
+}
+.ab-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(195,126,112,.5);
+  box-shadow: var(--shadow-lg);
+  background: rgba(244,238,234,.09);
+}
+
+/* feature card — Solvetech, current role, the dominant block */
+.ab-feature {
+  background: linear-gradient(155deg, rgba(195,126,112,.14), rgba(83,35,54,.32) 60%, rgba(33,23,29,.4));
+  border-color: rgba(195,126,112,.3);
+}
+.ab-card-head { margin-bottom: .8rem; }
+.ab-org { font-family: var(--display); font-size: clamp(1.3rem,2.2vw,1.8rem); color: var(--paper); margin: 0 0 .3rem; }
+.ab-role { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 0; }
+.ab-desc { color: var(--muted-dark); font-size: .96rem; line-height: 1.6; margin: 0 0 1.1rem; }
+.ab-lead-in { font-size: .88rem; color: var(--muted-dark); margin: 0 0 .6rem; opacity: .85; }
+.ab-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.ab-list li { position: relative; padding-left: 1.3em; font-size: .92rem; color: var(--paper); line-height: 1.5; }
+.ab-list li::before { content: ''; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+/* falcryx — wide medium card, spans into the row below it */
+.ab-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 1rem; }
+.ab-chips span { font-size: .74rem; padding: .45em 1em; border-radius: 100px; border: 1px solid var(--line-2); color: var(--muted-dark); transition: border-color .3s, color .3s; }
+.ab-card:hover .ab-chips span { border-color: rgba(195,126,112,.4); }
+
+/* dcu / hult — compact cards sharing a row beside falcryx */
+.ab-org-sm { font-size: clamp(1.05rem,1.6vw,1.3rem); }
+.ab-role-sm { font-family: var(--mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; }
+.ab-sub { font-size: .8rem; color: var(--muted-dark); margin: -.3rem 0 .6rem; opacity: .75; }
+.ab-desc-sm { font-size: .88rem; color: var(--muted-dark); line-height: 1.55; margin: 0; }
+.ab-desc-sm:not(:last-child) { margin-bottom: .8rem; }
+.ab-desc-sm strong { color: var(--paper); }
+.ab-desc-sm.ab-bullet { position: relative; padding-left: 1.2em; }
+.ab-desc-sm.ab-bullet::before { content: ''; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.ab-serif { font-style: italic; }
+
+/* iku — personal art thumbnails on top, text below */
+.ab-iku-media { display: flex; gap: 8px; margin: -6px -6px 16px; }
+.ab-iku-media img { width: 50%; height: 92px; object-fit: cover; border-radius: 12px; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.ab-card.ab-iku:hover .ab-iku-media img { transform: scale(1.06); }
+
+@media (max-width: 1000px) {
+  .ab-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "profile solvetech"
+      "falcryx falcryx"
+      "dcu     hult"
+      "iku     iku";
+  }
+}
+@media (max-width: 640px) {
+  .ab-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "profile"
+      "solvetech"
+      "falcryx"
+      "dcu"
+      "hult"
+      "iku";
+  }
+  .ab-portrait { min-height: 0; aspect-ratio: 4 / 3.6; flex: none; }
+  .ab-card:hover { transform: translateY(-3px); }
+  .ab-iku-media { height: 120px; }
+}
+
+/* =========================================================================
+   Featured projects — masonry gallery (CSS columns)
+   Columns (not a row-based grid) so every card stacks by its own actual
+   height — mismatched aspect ratios never leave a leftover gap below a
+   shorter card the way a shared grid row would. Cards are ordered in the
+   markup so similar/related designs land near each other, without any
+   visible section labels or dividers.
+   ========================================================================= */
+.fp-section {
+  background: #FFF7ED;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+}
+.fp-section .section-head .eyebrow { color: var(--ink-2); }
+.fp-section .section-head .section-title { color: var(--ink); }
+.fp-section .section-head .lead { color: var(--ink-2); }
+.fp-section .serif-accent { color: var(--ink-2); }
+.fp-wrap { max-width: 1440px; }
+.fp-grid {
+  --fp-gap: 16px;
+  column-count: 3;
+  column-gap: var(--fp-gap);
+}
+.fp-card {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: var(--fp-gap);
+}
+.fp-inner {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #eee;
+  border: none;
+  box-shadow: none;
+  transition: opacity .35s;
+}
+.fp-grid .fp-card:hover .fp-inner { opacity: .88; }
+.fp-media { position: relative; display: block; overflow: hidden; cursor: zoom-in; background: #e4e4e4; }
+.fp-media img { display: block; width: 100%; height: auto; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.fp-grid .fp-card:hover .fp-media img { transform: scale(1.015); }
+
+@media (max-width: 1000px) { .fp-grid { column-count: 2; } }
+@media (max-width: 560px)  { .fp-grid { column-count: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .fp-inner, .fp-media img { transition: none; }
+  .fp-grid .fp-card:hover .fp-media img { transform: none; }
+}
+
+/* =========================================================================
    Work — organization bands
    ========================================================================= */
 .band { border-top: 2.5px solid var(--ink); }

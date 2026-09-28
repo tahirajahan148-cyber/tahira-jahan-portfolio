@@ -112,10 +112,10 @@
 
     // delegate: any gallery item click opens its gallery group
     document.addEventListener('click', function (e) {
-      var item = e.target.closest('.g-item, .s-item');
+      var item = e.target.closest('.g-item, .s-item, .fp-media');
       if (!item) return;
       var group = item.closest('[data-gallery]') || document;
-      var items = [].slice.call(group.querySelectorAll('.g-item, .s-item'));
+      var items = [].slice.call(group.querySelectorAll('.g-item, .s-item, .fp-media'));
       var list = items.map(function (n) { var im = n.querySelector('img'); return { src: im.getAttribute('src'), alt: im.getAttribute('alt') }; });
       open(list, items.indexOf(item));
     });
@@ -336,12 +336,21 @@
     })();
   }
 
+  /* ---------- featured projects: uniform gallery grid ----------
+     Simple CSS Grid layout with equal gaps. All images at native aspect ratios. */
+  function initFeatured() {
+    var grid = document.getElementById('featuredGrid');
+    if (!grid) return;
+    // Grid is purely CSS-driven; no JS layout calculations needed.
+  }
+
   /* ---------- boot ---------- */
   function boot() {
     document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());
     initNav();
     initLightbox();
     initForm();
+    initFeatured();
     renderHome();
     initTyped();
     initReviews();
